@@ -7,21 +7,24 @@ gameBoard = turtle.Screen()
 gameBoard.setup(width=800, height=800)
 gameBoard.bgcolor("light blue")
 gameBoard.title("Turtle Board Game")
+y1 = gameBoard.window_height() * 0.45
+y2 = gameBoard.window_height() * 0.45
 
 #player objects
 t1 = turtle.Turtle()
 t1.speed(0)
 t1.shape("turtle")
+t1.color("green")
 t1.turtlesize(2)
 score_title = turtle.Turtle()
 score_title.hideturtle()
 score_title.penup()
-score_title.goto(-100, 360)
+score_title.goto(-50, y1)
 score_title.write("Score: 0", align="center", font=("Courier", 20, "normal"))
 timer_title = turtle.Turtle()
 timer_title.hideturtle()
 timer_title.penup()
-timer_title.goto(100, 360)
+timer_title.goto(70, y2)
 
 
 score = 0
@@ -50,16 +53,19 @@ def score_update(x, y):
         align="center",
         font=("Courier", 20, "normal")
     )
-
+    t1.color("red")
+    gameBoard.ontimer(turn_green(), 500)
+def turn_green():
+    t1.color("green")
 
 def turtle_move():
     if not game_over:
-        t1.hideturtle()
+        #t1.hideturtle()
         t1.penup()
         x = randint(-280, 280)
         y = randint(-280, 280)
         t1.goto(x, y)
-        t1.showturtle()
+        #t1.showturtle()
         gameBoard.ontimer(turtle_move, 800)
 
 def count_down(time_left):
